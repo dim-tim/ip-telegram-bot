@@ -15,39 +15,6 @@ import { showLastItem, showList } from './app.utils';
 import { Context } from './context.interface';
 import { isIPAddress } from 'ip-address-validator';
 
-// const ips = [
-//   {
-//     id: 1,
-//     ip: '192.1.1.1',
-//     info: [
-//       {
-//         id: 1,
-//         user_name: '@dkteluser',
-//         date: '01-01-2023',
-//         country: 'Argentina',
-//         city: 'Bueno',
-//         lat: '123213',
-//         lon: '1232121',
-//       },
-//     ],
-//   },
-//   {
-//     id: 2,
-//     ip: '192.1.1.2',
-//     info: [
-//       {
-//         id: 3,
-//         user_name: '@sasa',
-//         date: '01-01-2023',
-//         country: 'Belarus',
-//         city: 'Minsk',
-//         lat: '123213',
-//         lon: '1232121',
-//       },
-//     ],
-//   },
-// ];
-
 @Update()
 export class AppUpdate {
   constructor(
@@ -79,7 +46,7 @@ export class AppUpdate {
   @Hears('📋 Список ip')
   async listIps(ctx: Context) {
     const ips = await this.appService.getAll();
-    await ctx.reply(showList(ips));
+    await ctx.replyWithHTML(showList(ips));
   }
 
   @Hears('🆘 Помощь')
@@ -157,7 +124,7 @@ export class AppUpdate {
             ipServerResponse,
           );
           if (saved) {
-            await ctx.reply(showLastItem(saved));
+            await ctx.replyWithHTML(showLastItem(saved));
           } else {
             await ctx.reply(`Не смог сохранить IP в базу...`);
           }
@@ -170,7 +137,7 @@ export class AppUpdate {
           );
           if (saved) {
             console.log(saved);
-            await ctx.reply(showLastItem(saved));
+            await ctx.replyWithHTML(showLastItem(saved));
           } else {
             await ctx.reply(`Не смог сохранить IP в базу...`);
           }
