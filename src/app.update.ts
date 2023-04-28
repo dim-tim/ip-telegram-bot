@@ -120,8 +120,8 @@ export class AppUpdate {
         }
 
         if (addressFromDB) {
-          await ctx.reply(`IP ${ip} уже есть в базе...`);
-          await ctx.reply(`Новый IP (${ip}) принят...`);
+          await ctx.reply(`🚨🚨🚨 ${ip} уже есть в базе...🚨🚨🚨`);
+          await ctx.reply(`Обновляем состояние...`);
           const saved = await this.appService.updateAddress(
             ip,
             ctx.message.from?.username ? ctx.message.from?.username : '',
@@ -131,7 +131,7 @@ export class AppUpdate {
           if (saved) {
             await ctx.replyWithHTML(showLastItem(saved));
           } else {
-            await ctx.reply(`Не смог сохранить IP в базу...`);
+            await ctx.reply(`Не смог обновить IP в базе...`);
           }
         } else {
           await ctx.reply(`Новый IP ${ip} принят...`);
