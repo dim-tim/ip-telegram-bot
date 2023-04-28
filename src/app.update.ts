@@ -55,7 +55,8 @@ export class AppUpdate {
   async listIps(ctx: Context) {
     // ctx.session.type = 'list';
     const ips = await this.appService.getAllWithoutInfo();
-    if (ips) {
+    console.log('IPS', ips);
+    if (ips && ips.length > 0) {
       await ctx.reply(showListIps(ips));
     } else {
       await ctx.reply('В базе пока нет ни одного айпишника');
