@@ -79,6 +79,15 @@ export const showLastItem = (address) => {
     } else {
       const lastInfo: InfoEntity = address.info[address.info.length - 1];
 
+      let lastDateMsg = null;
+      if (address.info.length > 1) {
+        lastDateMsg =
+          'Дата последнего обновления: <b>' +
+          address.info[address.info.length - 2].created_at.toLocaleString() +
+          '</b>' +
+          '\n';
+      }
+
       let fraudMsg = '🟢 <b>Низкий риск</b>';
       if (lastInfo.fraud_score >= 85) {
         fraudMsg = '⛔ <b>Высокий риск</b>';
@@ -113,6 +122,7 @@ export const showLastItem = (address) => {
         address.info.length +
         '</b>' +
         '\n' +
+        (lastDateMsg ? lastDateMsg : '') +
         '👧 ' +
         '@' +
         lastInfo.username +

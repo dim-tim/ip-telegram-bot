@@ -11,7 +11,7 @@ import {
 import { Telegraf } from 'telegraf';
 import { actionButtons } from './app.buttons';
 import { AppService } from './app.service';
-import { showLastItem, showList, showListIps } from './app.utils';
+import { showLastItem, showListIps } from './app.utils';
 import { Context } from './context.interface';
 import { isIPAddress } from 'ip-address-validator';
 
