@@ -120,7 +120,7 @@ export class AppUpdate {
         }
 
         if (addressFromDB) {
-          await ctx.replyWithHTML(`‼‼🚨<br>${ip} уже есть в базе‼‼</br>`);
+          await ctx.replyWithHTML(`‼‼🚨<b>${ip} уже есть в базе‼‼</b>`);
           await ctx.reply(`Обновляем состояние...`);
           const saved = await this.appService.updateAddress(
             ip,
