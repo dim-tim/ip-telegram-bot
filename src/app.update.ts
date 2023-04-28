@@ -119,12 +119,19 @@ export class AppUpdate {
           return;
         }
 
+        let username: string = ctx.message.from?.username
+          ? ctx.message.from?.username
+          : null;
+        if (!username) {
+          username = ctx.message.from?.first_name;
+        }
+
         if (addressFromDB) {
           await ctx.replyWithHTML(`‼‼🚨<b>${ip} уже есть в базе‼‼</b>`);
           await ctx.reply(`Обновляем состояние...`);
           const saved = await this.appService.updateAddress(
             ip,
-            ctx.message.from?.username ? ctx.message.from?.username : '',
+            username ? username : '',
             addressFromDB,
             ipServerResponse,
           );
@@ -137,7 +144,7 @@ export class AppUpdate {
           await ctx.reply(`Новый IP ${ip} принят...`);
           const saved = await this.appService.createAddress(
             ip,
-            ctx.message.from?.username ? ctx.message.from?.username : '',
+            username ? username : '',
             ipServerResponse,
           );
           if (saved) {
