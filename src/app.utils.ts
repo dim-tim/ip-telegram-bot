@@ -46,7 +46,6 @@ export const showList = (ips) =>
           '</b>' +
           '\n' +
           '👧 ' +
-          '@' +
           inf.username +
           '\n' +
           '🌐 ' +
@@ -124,7 +123,6 @@ export const showLastItem = (address) => {
         '\n' +
         (lastDateMsg ? lastDateMsg : '') +
         '👧 ' +
-        '@' +
         lastInfo.username +
         '\n' +
         '🌐 ' +

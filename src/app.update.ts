@@ -120,7 +120,7 @@ export class AppUpdate {
         }
 
         let username: string = ctx.message.from?.username
-          ? ctx.message.from?.username
+          ? '@' + ctx.message.from?.username
           : null;
         if (!username) {
           username = ctx.message.from?.first_name;
