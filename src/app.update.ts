@@ -29,11 +29,11 @@ export class AppUpdate {
     await ctx.reply(`Привіт ${ctx.message.from?.first_name} ! 👋`);
     await ctx.reply('Вас вітає айпі-бот!', actionButtons());
     await ctx.reply(
-      'Чтобы сохранить ip - просто вводи его ниже и жми Enter',
+      'Щоб зберегти ip - просто вводь його нижче і тисни Enter',
       actionButtons(),
     );
     await ctx.reply(
-      'Для получения доп функций - переходи в меню, жмякай и следуй инструкциям',
+      'Для отримання додаткових функцій - переходи в меню та дотримуйся інструкцій',
       actionButtons(),
     );
   }
@@ -42,7 +42,6 @@ export class AppUpdate {
   async helpCommand(ctx: Context) {
     // ctx.session.type = 'help';
     await ctx.reply(`/start - Перезапустить бота`);
-    await ctx.reply(`/list - Список IPs`);
     await ctx.reply('/help - Помощь', actionButtons());
   }
 
@@ -56,7 +55,11 @@ export class AppUpdate {
   async listIps(ctx: Context) {
     // ctx.session.type = 'list';
     const ips = await this.appService.getAllWithoutInfo();
-    await ctx.replyWithHTML(showListIps(ips));
+    if (ips) {
+      await ctx.reply(showListIps(ips));
+    } else {
+      await ctx.reply('В базе пока нет ни одного айпишника');
+    }
   }
 
   // @Hears('📋 Список ip')
@@ -75,13 +78,7 @@ export class AppUpdate {
   @Hears('🆘 Помощь')
   async help(ctx: Context) {
     // ctx.session.type = 'help';
-    const helpMsg =
-      '/start - Перезапустить бота' +
-      '\n' +
-      '/list - Список IPs' +
-      '\n' +
-      '/help - Помощь' +
-      '\n';
+    const helpMsg = '/start - Перезапустить бота' + '\n' + '/help - Помощь';
     await ctx.reply(helpMsg, actionButtons());
   }
 
