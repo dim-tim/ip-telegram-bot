@@ -1,5 +1,12 @@
 import { InfoEntity } from './entity/info.entity';
 
+export const showListIps = (ips) =>
+  `${ips
+    .map((item) => {
+      const msg = item.ip + '\n';
+      return msg;
+    })
+    .join('')}`;
 export const showList = (ips) =>
   `${ips
     .map((item) => {

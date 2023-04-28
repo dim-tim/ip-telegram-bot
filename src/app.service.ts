@@ -37,6 +37,18 @@ export class AppService {
     });
   }
 
+  async getAllWithoutInfo() {
+    return this.addressEntityRepository.find();
+  }
+
+  async deleteIP(ip: string) {
+    const address = await this.getByIp(ip);
+    if (!address) return null;
+
+    await this.addressEntityRepository.delete({ ip: ip });
+    return this.getAll();
+  }
+
   async getByIp(ip: string) {
     return this.addressEntityRepository.findOne({
       where: {

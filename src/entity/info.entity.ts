@@ -14,7 +14,9 @@ export class InfoEntity {
   @CreateDateColumn()
   created_at: Date;
 
-  @ManyToOne(() => AddressEntity, (address) => address.info)
+  @ManyToOne(() => AddressEntity, (address) => address.info, {
+    onDelete: 'CASCADE',
+  })
   address: AddressEntity;
 
   @Column()
