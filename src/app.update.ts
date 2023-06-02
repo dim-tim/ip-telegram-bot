@@ -57,7 +57,25 @@ export class AppUpdate {
     const ips = await this.appService.getAllWithoutInfo();
     console.log('IPS', ips);
     if (ips && ips.length > 0) {
-      await ctx.reply(showListIps(ips));
+      const messageString = showListIps(ips);
+
+      const max_size = 4096;
+
+      const amount_sliced = messageString.length / max_size;
+      let start = 0;
+      let end = max_size;
+      let message;
+      const messagesArray = [];
+      for (let i = 0; i < amount_sliced; i++) {
+        message = messageString.slice(start, end);
+        messagesArray.push(message);
+        start = start + max_size;
+        end = end + max_size;
+      }
+      for (const messagesArrayElement of messagesArray) {
+        await ctx.reply(messagesArrayElement);
+        await new Promise((f) => setTimeout(f, 3000));
+      }
     } else {
       await ctx.reply('В базе пока нет ни одного айпишника');
     }
