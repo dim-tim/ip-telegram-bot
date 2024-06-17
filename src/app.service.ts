@@ -16,17 +16,22 @@ export class AppService {
   ) {}
 
   async getHttpInformationByIP(ip: string) {
-    const { data } = await axios.get<IpServerResponse>(
-      `https://ipqualityscore.com/api/json/ip/y5Yi0se0ETEqauxQW8qULEyihfow356L/${ip}`,
-    );
+    try {
+      console.log('IP=', ip);
+      const { data } = await axios.get<IpServerResponse>(
+        `https://ipqualityscore.com/api/json/ip/y5Yi0se0ETEqauxQW8qULEyihfow356L/${ip}`,
+      );
 
-    console.log(data);
+      console.log(data);
 
-    if (data && data.success) {
-      return data;
+      if (data && data.success) {
+        return data;
+      }
+    } catch (e) {
+      return;
     }
 
-    return null;
+    return;
   }
 
   async getAll() {

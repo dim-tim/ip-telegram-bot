@@ -127,6 +127,7 @@ export class AppUpdate {
         const addressFromDB = await this.appService.getByIp(ip);
 
         await ctx.reply('Пробиваем инфу по айпишнику...');
+        await ctx.reply('Почти готово...');
         const ipServerResponse = await this.appService.getHttpInformationByIP(
           ip,
         );
